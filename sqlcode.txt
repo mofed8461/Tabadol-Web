@@ -63,3 +63,19 @@ COMMIT;
 
 
 
+
+
+
+
+
+
+
+
+
+
+INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES
+(1, 'admin', 'admin', 1);
+COMMIT;
+
+
+
