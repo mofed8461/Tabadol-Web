@@ -44,13 +44,6 @@ ALTER TABLE `schools`
 
 
 
-
-
-
-
-
-
-
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -68,14 +61,74 @@ COMMIT;
 
 
 
+DROP TABLE IF EXISTS `requests`;
+CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
 
 
+
+
+
+DROP TABLE IF EXISTS `request_data`;
+CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `request_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS `dev_types`;
+CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL ) ENGINE = InnoDB;
+
+
+
+
+
+
+DROP TABLE IF EXISTS `fault_dev`;
+CREATE TABLE `TabadolWeb`.`fault_dev` ( `id` INT NOT NULL AUTO_INCREMENT , `dev_type_id` INT NOT NULL , `request_id` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+
+
+
+DROP TABLE IF EXISTS `school_dev_data`;
+CREATE TABLE `TabadolWeb`.`school_dev_data` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+
+
+DROP TABLE IF EXISTS `fault_dev_img`;
+CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `img` VARCHAR(128) NOT NULL , `fault_dev_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+
+
+
+
+
+
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `school_1_id` INT NOT NULL , `school_2_id` INT NOT NULL , `phone_1` VARCHAR(32) NOT NULL , `phone_2` VARCHAR(32) NOT NULL , `name_1` VARCHAR(64) NOT NULL , `name_2` VARCHAR(64) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `request_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+
+
+// add foreign keys
+
+
+
+
+
+
+// add default values
 
 INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES
 (1, 'admin', 'admin', 1);
 COMMIT;
-
-
 
