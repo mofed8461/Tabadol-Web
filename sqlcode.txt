@@ -80,7 +80,7 @@ CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `r
 
 
 DROP TABLE IF EXISTS `dev_types`;
-CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL ) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;
 
 
 
@@ -121,8 +121,27 @@ CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `s
 
 // add foreign keys
 
+ALTER TABLE `requests` ADD FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`);
 
+ALTER TABLE `request_data` ADD FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
 
+ALTER TABLE `request_data` ADD FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`);
+
+ALTER TABLE `fault_dev` ADD FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`);
+
+ALTER TABLE `fault_dev` ADD FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
+
+ALTER TABLE `fault_dev_img` ADD FOREIGN KEY (`fault_dev_id`) REFERENCES `fault_dev` (`id`);
+
+ALTER TABLE `school_dev_data` ADD FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`);
+
+ALTER TABLE `school_dev_data` ADD FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`);
+
+ALTER TABLE `transactions` ADD FOREIGN KEY (`school_1_id`) REFERENCES `schools` (`id`);
+
+ALTER TABLE `transactions` ADD FOREIGN KEY (`school_2_id`) REFERENCES `schools` (`id`);
+
+ALTER TABLE `transactions` ADD FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
 
 
 
