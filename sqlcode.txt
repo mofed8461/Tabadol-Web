@@ -1,4 +1,16 @@
-drop database TabadolWeb;
+
+
+
+-- remove DB
+
+
+DROP DATABASE IF EXISTS TabadolWeb;
+
+
+-- create all tables
+
+
+
 
 create database TabadolWeb;
 
@@ -44,15 +56,14 @@ ALTER TABLE `schools`
 
 
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `permission` int(11) NOT NULL,
+  `school_id` int(11),
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-COMMIT;
 
 
 
@@ -61,7 +72,7 @@ COMMIT;
 
 
 
-DROP TABLE IF EXISTS `requests`;
+
 CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
@@ -70,7 +81,6 @@ CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `schoo
 
 
 
-DROP TABLE IF EXISTS `request_data`;
 CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `request_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
@@ -79,7 +89,6 @@ CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `r
 
 
 
-DROP TABLE IF EXISTS `dev_types`;
 CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;
 
 
@@ -87,22 +96,18 @@ CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL AUTO_INCREMENT , `name
 
 
 
-DROP TABLE IF EXISTS `fault_dev`;
 CREATE TABLE `TabadolWeb`.`fault_dev` ( `id` INT NOT NULL AUTO_INCREMENT , `dev_type_id` INT NOT NULL , `request_id` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
 
 
 
-
-DROP TABLE IF EXISTS `school_dev_data`;
 CREATE TABLE `TabadolWeb`.`school_dev_data` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
 
 
 
-DROP TABLE IF EXISTS `fault_dev_img`;
 CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `img` VARCHAR(128) NOT NULL , `fault_dev_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
@@ -113,41 +118,42 @@ CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `
 
 
 
-DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `school_1_id` INT NOT NULL , `school_2_id` INT NOT NULL , `phone_1` VARCHAR(32) NOT NULL , `phone_2` VARCHAR(32) NOT NULL , `name_1` VARCHAR(64) NOT NULL , `name_2` VARCHAR(64) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `request_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
 
 
-// add foreign keys
+-- add foreign keys
 
-ALTER TABLE `requests` ADD FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`);
+ALTER TABLE `users` ADD CONSTRAINT `users_school_fk` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `request_data` ADD FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
+ALTER TABLE `requests` ADD CONSTRAINT `request_school_fk` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `request_data` ADD FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`);
+ALTER TABLE `request_data` ADD CONSTRAINT `request_data_request_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `fault_dev` ADD FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`);
+ALTER TABLE `request_data` ADD CONSTRAINT `request_data_dev_types_fk` FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `fault_dev` ADD FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
+ALTER TABLE `fault_dev` ADD CONSTRAINT `fault_dev_dev_types_fk` FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `fault_dev_img` ADD FOREIGN KEY (`fault_dev_id`) REFERENCES `fault_dev` (`id`);
+ALTER TABLE `fault_dev` ADD CONSTRAINT `fault_dev_requests_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `school_dev_data` ADD FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`);
+ALTER TABLE `fault_dev_img` ADD CONSTRAINT `fault_dev_img_fault_dev_fk` FOREIGN KEY (`fault_dev_id`) REFERENCES `fault_dev` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `school_dev_data` ADD FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`);
+ALTER TABLE `school_dev_data` ADD CONSTRAINT `school_dev_data_schools_fk` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `transactions` ADD FOREIGN KEY (`school_1_id`) REFERENCES `schools` (`id`);
+ALTER TABLE `school_dev_data` ADD CONSTRAINT `school_dev_data_dev_types_fk` FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `transactions` ADD FOREIGN KEY (`school_2_id`) REFERENCES `schools` (`id`);
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_schools1_fk` FOREIGN KEY (`school_1_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
 
-ALTER TABLE `transactions` ADD FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`);
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_schools2_fk` FOREIGN KEY (`school_2_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_requests_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE;
 
 
 
-// add default values
+-- add default values
 
 INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES
 (1, 'admin', 'admin', 1);
-COMMIT;
+
 
