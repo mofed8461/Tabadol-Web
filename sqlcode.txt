@@ -24,7 +24,7 @@ CREATE TABLE `schools` (
   `school_number` varchar(32) NOT NULL,
   `city` varchar(32) NOT NULL,
   `address` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `permission` int(11) NOT NULL,
   `school_id` int(11),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 
 
-CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -81,7 +81,7 @@ CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `schoo
 
 
 
-CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `request_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `request_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -89,26 +89,26 @@ CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `r
 
 
 
-CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
 
 
 
-CREATE TABLE `TabadolWeb`.`fault_dev` ( `id` INT NOT NULL AUTO_INCREMENT , `dev_type_id` INT NOT NULL , `request_id` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`fault_dev` ( `id` INT NOT NULL AUTO_INCREMENT , `dev_type_id` INT NOT NULL , `request_id` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
 
 
-CREATE TABLE `TabadolWeb`.`school_dev_data` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`school_dev_data` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
 
 
-CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `img` VARCHAR(128) NOT NULL , `fault_dev_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `img` VARCHAR(128) NOT NULL , `fault_dev_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -118,7 +118,7 @@ CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `
 
 
 
-CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `school_1_id` INT NOT NULL , `school_2_id` INT NOT NULL , `phone_1` VARCHAR(32) NOT NULL , `phone_2` VARCHAR(32) NOT NULL , `name_1` VARCHAR(64) NOT NULL , `name_2` VARCHAR(64) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `request_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `school_1_id` INT NOT NULL , `school_2_id` INT NOT NULL , `phone_1` VARCHAR(32) NOT NULL , `phone_2` VARCHAR(32) NOT NULL , `name_1` VARCHAR(64) NOT NULL , `name_2` VARCHAR(64) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `request_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -153,7 +153,18 @@ ALTER TABLE `transactions` ADD CONSTRAINT `transactions_requests_fk` FOREIGN KEY
 
 -- add default values
 
-INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES
-(1, 'admin', 'admin', 1);
+INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES (1, 'admin', 'admin', 1);
+
+INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('كمال جمبلاط', '092377777', 'alia', '32.224655, 35.233961', '1234' ,'Nablus', 'Rafeedia St.');
+
+INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('بنات رفيديا', '092377776', 'suad', '32.224684, 35.233356', '4321' ,'Nablus', 'Rafeedia St.');
+
+
+INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES ('alia', 'alia123', 2, 1);
+
+INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES ('suad', 'suad123', 2, 2);
+
+
+
 
 
