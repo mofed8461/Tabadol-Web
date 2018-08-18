@@ -155,14 +155,26 @@ ALTER TABLE `transactions` ADD CONSTRAINT `transactions_requests_fk` FOREIGN KEY
 
 INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES (1, 'admin', 'admin', 1);
 
-INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('كمال جمبلاط', '092377777', 'alia', '32.224655, 35.233961', '1234' ,'Nablus', 'Rafeedia St.');
 
-INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('بنات رفيديا', '092377776', 'suad', '32.224684, 35.233356', '4321' ,'Nablus', 'Rafeedia St.');
 
 
 INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES ('alia', 'alia123', 2, 1);
 
 INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES ('suad', 'suad123', 2, 2);
+
+
+
+
+INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('كمال جمبلاط', '092377777', 'alia', '32.224655, 35.233961', '1234' ,'Nablus', 'Rafeedia St.');
+
+INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('بنات رفيديا', '092377776', 'suad', '32.224684, 35.233356', '4321' ,'Nablus', 'Rafeedia St.');
+
+
+
+
+INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Microscope', 'dev_imgs/mi.png', 'ser1232');
+
+INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Vernier Caliper', 'dev_imgs/cp.png', 'ser1443');
 
 
 

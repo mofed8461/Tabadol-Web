@@ -1,0 +1,7 @@
+php.ini
+fileUploadOn=1
+
+
+need permission for upload
+sudo chmod -R 0755 ./dev_imgs
+
