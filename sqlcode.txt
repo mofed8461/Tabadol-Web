@@ -1,4 +1,16 @@
-drop database TabadolWeb;
+
+
+
+-- remove DB
+
+
+DROP DATABASE IF EXISTS TabadolWeb;
+
+
+-- create all tables
+
+
+
 
 create database TabadolWeb;
 
@@ -12,7 +24,7 @@ CREATE TABLE `schools` (
   `school_number` varchar(32) NOT NULL,
   `city` varchar(32) NOT NULL,
   `address` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
@@ -44,66 +56,14 @@ ALTER TABLE `schools`
 
 
 
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `permission` int(11) NOT NULL,
+  `school_id` int(11),
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-COMMIT;
-
-
-
-
-
-
-
-
-DROP TABLE IF EXISTS `requests`;
-CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-
-
-
-
-
-
-DROP TABLE IF EXISTS `request_data`;
-CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `request_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-
-
-
-
-
-
-DROP TABLE IF EXISTS `dev_types`;
-CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL ) ENGINE = InnoDB;
-
-
-
-
-
-
-DROP TABLE IF EXISTS `fault_dev`;
-CREATE TABLE `TabadolWeb`.`fault_dev` ( `id` INT NOT NULL AUTO_INCREMENT , `dev_type_id` INT NOT NULL , `request_id` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-
-
-
-
-
-DROP TABLE IF EXISTS `school_dev_data`;
-CREATE TABLE `TabadolWeb`.`school_dev_data` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-
-
-
-
-DROP TABLE IF EXISTS `fault_dev_img`;
-CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `img` VARCHAR(128) NOT NULL , `fault_dev_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 
@@ -113,22 +73,110 @@ CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `
 
 
 
-DROP TABLE IF EXISTS `transactions`;
-CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `school_1_id` INT NOT NULL , `school_2_id` INT NOT NULL , `phone_1` VARCHAR(32) NOT NULL , `phone_2` VARCHAR(32) NOT NULL , `name_1` VARCHAR(64) NOT NULL , `name_2` VARCHAR(64) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `request_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
-
-
-
-
-// add foreign keys
+CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
 
 
 
-// add default values
 
-INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES
-(1, 'admin', 'admin', 1);
-COMMIT;
+CREATE TABLE `TabadolWeb`.`request_data` ( `id` INT NOT NULL AUTO_INCREMENT , `request_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+CREATE TABLE `TabadolWeb`.`dev_types` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(32) NOT NULL , `img` VARCHAR(128) NOT NULL , `code` VARCHAR(128) NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+CREATE TABLE `TabadolWeb`.`fault_dev` ( `id` INT NOT NULL AUTO_INCREMENT , `dev_type_id` INT NOT NULL , `request_id` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+CREATE TABLE `TabadolWeb`.`school_dev_data` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `dev_type_id` INT NOT NULL , `quantity` INT NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+CREATE TABLE `TabadolWeb`.`fault_dev_img` ( `id` INT NOT NULL AUTO_INCREMENT , `img` VARCHAR(128) NOT NULL , `fault_dev_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+
+
+CREATE TABLE `TabadolWeb`.`transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `school_1_id` INT NOT NULL , `school_2_id` INT NOT NULL , `phone_1` VARCHAR(32) NOT NULL , `phone_2` VARCHAR(32) NOT NULL , `name_1` VARCHAR(64) NOT NULL , `name_2` VARCHAR(64) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `request_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
+-- add foreign keys
+
+ALTER TABLE `users` ADD CONSTRAINT `users_school_fk` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `requests` ADD CONSTRAINT `request_school_fk` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `request_data` ADD CONSTRAINT `request_data_request_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `request_data` ADD CONSTRAINT `request_data_dev_types_fk` FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `fault_dev` ADD CONSTRAINT `fault_dev_dev_types_fk` FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `fault_dev` ADD CONSTRAINT `fault_dev_requests_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `fault_dev_img` ADD CONSTRAINT `fault_dev_img_fault_dev_fk` FOREIGN KEY (`fault_dev_id`) REFERENCES `fault_dev` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `school_dev_data` ADD CONSTRAINT `school_dev_data_schools_fk` FOREIGN KEY (`school_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `school_dev_data` ADD CONSTRAINT `school_dev_data_dev_types_fk` FOREIGN KEY (`dev_type_id`) REFERENCES `dev_types` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_schools1_fk` FOREIGN KEY (`school_1_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_schools2_fk` FOREIGN KEY (`school_2_id`) REFERENCES `schools` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `transactions` ADD CONSTRAINT `transactions_requests_fk` FOREIGN KEY (`request_id`) REFERENCES `requests` (`id`) ON DELETE CASCADE;
+
+
+
+-- add default values
+
+INSERT INTO `users` (`id`, `username`, `password`, `permission`) VALUES (1, 'admin', 'admin', 1);
+
+
+
+
+INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES ('alia', 'alia123', 2, 1);
+
+INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES ('suad', 'suad123', 2, 2);
+
+
+
+
+INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('كمال جمبلاط', '092377777', 'alia', '32.224655, 35.233961', '1234' ,'Nablus', 'Rafeedia St.');
+
+INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_number`, `city`, `address`) VALUES ('بنات رفيديا', '092377776', 'suad', '32.224684, 35.233356', '4321' ,'Nablus', 'Rafeedia St.');
+
+
+
+
+INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Microscope', 'dev_imgs/mi.png', 'ser1232');
+
+INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Vernier Caliper', 'dev_imgs/cp.png', 'ser1443');
+
+
+
+
 
