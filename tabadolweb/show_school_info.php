@@ -34,13 +34,13 @@ include "connect.php";
 <?php
 
 
-if (isset($_SESSION['permission']))
+if (isset($_SESSION['permission']) && isset($_GET["id"]))
 {
 
     
   
         
-        $query = $con->query("select * from schools,ev_types.school_dev_data where schools.id=school_dev_data.school_id and school_dev_data.dev_types_id=dev_types.id and schools.id= ".$_GET["id"]);
+        $query = $con->query("select dev_types.name as name, school_dev_data.quantity as quantity, school_dev_data.notes as notes from schools, dev_types, school_dev_data where schools.id=school_dev_data.school_id and school_dev_data.dev_type_id=dev_types.id and schools.id=" . $_GET["id"]) or die($con->error);
 
         $count = mysqli_num_rows($query);
         echo "<table border='1px'>";
