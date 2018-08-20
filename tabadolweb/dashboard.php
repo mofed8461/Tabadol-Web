@@ -85,7 +85,7 @@ if (isset($_SESSION['permission']))
 
         while ($result = $query->fetch_assoc())
         {
-            echo "<tr>";
+            echo "<tr><a href=‘show_school_info.php?id=" . $result[“id”] . “>”;
             echo "<td>" . $result["name"] . "</td>";
             echo "<td>" . $result["city"] . "</td>";
             echo "<td>" . $result["manager_name"] . "</td>";
