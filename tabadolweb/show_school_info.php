@@ -74,7 +74,7 @@ else
 
 
 ?>
-<a href="logout.php">Log out</a>
+<a href="dashboard.php">عوده</a>
 </div>
 </div>
 </body>

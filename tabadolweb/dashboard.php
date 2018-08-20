@@ -41,7 +41,7 @@ if (isset($_SESSION['permission']))
     if ($_SESSION['permission'] == 1)
     {
         // admin
-        $query = $con->query("select * from schools");
+        $query = $con->query("select schools.id as id, schools.name as name, schools.city as city, schools.manager_name as manager_name, schools.phone as phone, schools.school_number as school_number from schools");
 
         $count = mysqli_num_rows($query);
         echo "<table border='1px'>";
@@ -56,7 +56,7 @@ if (isset($_SESSION['permission']))
         while ($result = $query->fetch_assoc())
         {
             echo "<tr>";
-            echo "<td>" . $result["name"] . "</td>";
+            echo "<td><a href='show_school_info.php?id=" . $result["id"] . "'>" . $result["name"] . "</a></td>";
             echo "<td>" . $result["city"] . "</td>";
             echo "<td>" . $result["manager_name"] . "</td>";
             echo "<td>" . $result["phone"] . "</td>";
@@ -71,7 +71,7 @@ if (isset($_SESSION['permission']))
     {
         // normal user
 
-        $query = $con->query("select * from schools, users where schools.id = users.school_id and users.username = '". $_SESSION["username"] . "'");
+        $query = $con->query("select schools.id as id, schools.name as name, schools.city as city, schools.manager_name as manager_name, schools.phone as phone, schools.school_number as school_number from schools, users where schools.id = users.school_id and users.username = '". $_SESSION["username"] . "'");
 
         $count = mysqli_num_rows($query);
         echo "<table border='1px'>";
@@ -85,8 +85,8 @@ if (isset($_SESSION['permission']))
 
         while ($result = $query->fetch_assoc())
         {
-            echo "<tr><a href=‘show_school_info.php?id=" . $result[“id”] . “>”;
-            echo "<td>" . $result["name"] . "</td>";
+            echo "<tr>";
+            echo "<td><a href='show_school_info.php?id=" . $result["id"] . "'>" . $result["name"] . "</a></td>";
             echo "<td>" . $result["city"] . "</td>";
             echo "<td>" . $result["manager_name"] . "</td>";
             echo "<td>" . $result["phone"] . "</td>";
@@ -105,7 +105,7 @@ else
 
 
 ?>
-<a href="logout.php">Log out</a>
+<a href="logout.php">تسجيل الخروج</a>
 </div>
 </div>
 </body>
