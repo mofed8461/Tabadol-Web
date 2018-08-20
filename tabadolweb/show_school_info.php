@@ -74,6 +74,7 @@ else
 
 
 ?>
+<a href="add_school_devices.php">اضافه اجهزه</a><br />
 <a href="dashboard.php">عوده</a>
 </div>
 </div>
