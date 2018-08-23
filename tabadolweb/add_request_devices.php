@@ -3,15 +3,15 @@ session_start();
 include "connect.php";
 
 
-if (isset($_GET['id']))
+if (isset($_GET['id']) && isset($_GET['request_id']) && isset($_GET['quantity']) && isset($_GET['add']))
 {
-    $con->query("INSERT INTO school_dev_data (school_id, dev_type_id, quantity, notes) VALUES ('" . $_GET['id'] . "', '" . $_GET['dev_id'] . "', '" . $_GET['quantity'] . "', '" . $_GET['notes'] . "')");
+    $con->query("INSERT INTO request_data (request_id, dev_type_id, quantity) VALUES ('" . $_GET['request_id'] . "', '" . $_GET['dev_id'] . "', '" . $_GET['quantity'] . "')");
+
+    header('Location: request_view.php?id=' . $_GET['id'] . '&request_id=' . $_GET['request_id']);
 }
 
 
 $query = $con->query("select * from dev_types");
-
-$count = mysqli_num_rows($query);
 
 
 ?>
@@ -139,7 +139,7 @@ while ($result = $query->fetch_assoc())
 
 
 
-$query = $con->query("select schools.id as id from users, schools where schools.id = users.school_id and users.username = '". $_SESSION["username"] . "'");
+$query = $con->query("SELECT schools.id as id from users, schools where schools.id = users.school_id and users.username = '". $_SESSION["username"] . "'");
 $result = $query->fetch_assoc();
 
 ?>
@@ -220,19 +220,13 @@ $result = $query->fetch_assoc();
                 return;
             }
 
-            var notes = document.getElementById("notes").value;
-
-
-            window.location = "add_school_devices.php?id=<?php echo $result['id']; ?>&quantity=" + quantity + "&dev_id=" + selectedID + "&notes=" + notes;
+            window.location = "add_request_devices.php?id=<?php echo $result['id']; ?>&request_id=<?php echo $_GET["request_id"]; ?>&quantity=" + quantity + "&dev_id=" + selectedID + "&add=true";
         }
 
         </script>
         <br />
         الكميه
         <input id="quantity" type="number" />
-        <br />
-        ملاحظات
-        <input id="notes" type="text" />
         <br />
         <button onclick="submit();">اضافه</button>
 

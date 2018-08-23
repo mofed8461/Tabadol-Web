@@ -19,6 +19,7 @@ CREATE TABLE `schools` (
   `id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `phone` varchar(16) NOT NULL,
+  `email` varchar(128) NOT NULL,
   `manager_name` varchar(128) NOT NULL,
   `location_lat` varchar(128) NOT NULL,
   `location_lng` varchar(200) NOT NULL,
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 
 
-CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `TabadolWeb`.`requests` ( `id` INT NOT NULL AUTO_INCREMENT , `school_id` INT NOT NULL , `phone` VARCHAR(20) NOT NULL , `name` VARCHAR(40) NOT NULL , `start_time` DATETIME NOT NULL , `end_time` DATETIME NOT NULL , `notes` VARCHAR(256) NOT NULL , `req_code` VARCHAR(256) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 
 
@@ -169,9 +170,9 @@ INSERT INTO `users` (`username`, `password`, `permission`, `school_id`)  VALUES 
 
 
 
-INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location_lat`, `location_lng`, `school_number`, `city`, `address`) VALUES ('كمال جمبلاط', '092377777', 'alia', '32.224655', '35.233961', '1234' ,'Nablus', 'Rafeedia St.');
+INSERT INTO `schools` (`name`, `phone`, `email`, `manager_name`, `location_lat`, `location_lng`, `school_number`, `city`, `address`) VALUES ('كمال جمبلاط', '092377777', 'mofed8461@hotmail.com', 'alia', '32.224655', '35.233961', '1234' ,'نابلس', 'Rafeedia St.');
 
-INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location_lat`, `location_lng`, `school_number`, `city`, `address`) VALUES ('بنات رفيديا', '092377776', 'suad', '32.224684', '35.233356', '4321' ,'Nablus', 'Rafeedia St.');
+INSERT INTO `schools` (`name`, `phone`, `email`, `manager_name`, `location_lat`, `location_lng`, `school_number`, `city`, `address`) VALUES ('بنات رفيديا', '092377776', 'mofed8461@icloud.com', 'suad', '32.224684', '35.233356', '4321' ,'نابلس', 'Rafeedia St.');
 
 
 
