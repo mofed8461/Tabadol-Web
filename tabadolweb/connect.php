@@ -7,7 +7,7 @@
  */
 $con = new mysqli("localhost" , "root" , "" ,"tabadolweb") or die("error in connect dataBase");
 
-
+$con->set_charset("utf8");
 
 
 
