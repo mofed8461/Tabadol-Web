@@ -36,7 +36,7 @@
 
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Add school</title>
+    <title>Update school</title>
     <script language="javascript">
 
         function check()
@@ -45,7 +45,6 @@
             var manager_name    = document.addform.manager_name.value;
             var phone    = document.addform.phone.value;
             var lat             = document.addform.location_lat.value;
-            var lng           = document.addform.location_lng.value;
             var school_number   = document.addform.school_number.value;
             var city           = document.addform.city.value;
             var address       = document.addform.address.value;
@@ -53,35 +52,32 @@
 
             if( school_name =="")
             {
-                alert("Error: please enter 'school name'");
+                alert("خطا : الرجاء ادخال اسم المدرسة.");
             }
             else if(manager_name == "")
             {
-                alert("Error: please enter 'manager name'");
+                alert("خطا : الرجاء ادخال اسم المدير.");
             }
             else if(phone == "")
             {
-                alert("Error: please enter 'phone number '");
+                alert("خطا : الرجاء ادخال رقم صحيح. ");
             }
             else if ( lat == 0)
             {
-                alert("Error: please pin place in map ");
+                alert("خطا : الرجاء تعيين الموقع على الخريطه. ");
             }
-            else if ( lng == 0)
-            {
-                alert("Error: please pin place in map ");
-            }
+
             else if(school_number == "" )
             {
-                alert("Error: please enter 'school_number'");
+                alert("خطا: الرجاء ادخال رقم المدرسة.");
             }
             else if (city == "")
             {
-                alert("Error: please enter 'city'");
+                alert("خطا: الرجاء ادخال اسم المدينة.");
             }
             else if(address == "")
             {
-                alert("Error: please enter 'address'");
+                alert("خطا : الرجاء ادخال العنوان. ");
             }
 
             else
@@ -95,74 +91,79 @@
 </head>
 
 <body>
+<?php
+$id = $_GET["id"];
+include("connect.php");
+$query = $con ->query("select * from schools where id=$id") or die("Error: cant get data");
+$row= $query ->fetch_assoc();
 
-<div align="center" style="background-color:#666"><h2> Add school to data base</h2></div>
+$city = $row["city"];
+$id1 = $row["id"];
 
-<form name="addform" method="post" action="add2.php" accept-charset="utf-8">
+
+
+?>
+
+<div align="center" style="background-color:#666"><h2> تعديل معلومات المدرسة </h2></div>
+<form name="addform" method="post" action="final%20update.php">
+    <input type="hidden" name="id" value="<?php echo $id ?>"/>
     <table align="left" style="margin-left: 10px;">
-
 
         <tr>
             <td height="55">School name</td>
-          <td><input type="text" name="school_name" pattern=[أ-يa-zA-Z] /></td>
+            <td><input type="text" name="school_name" value="<?php echo $row["name"];?>" /></td>
         </tr>
-
         <tr>
             <td height="55">Manager name</td>
-          <td><input type="text" name="manager_name"  /></td>
+            <td><input type="text" name="manager_name" value="<?php echo $row["manager_name"];?>" /></td>
         </tr>
         <tr>
             <td height="55">Phone number</td>
-            <td><input type="text" name="phone"  /></td>
+            <td><input type="text" name="phone" value="<?php echo $row["phone"];?>" /></td>
         </tr>
+
         <div class="coordenadas">
-        <tr><td> <span>Google Maps coordinates</span></td></tr>
-        <tr>
-            <td height="55">location.lat:</td>
-          <td><input type="text" name="location_lat" id="lat" value="0" /></td>
-        </tr>
-        <tr>
-            <td height="55">location.lng:</td>
-            <td><input type="text" name="location_lng" id="lng" value="0" /></td>
-        </tr>
+            <tr><td> <span>Google Maps coordinates</span></td></tr>
+            <tr>
+                <td height="55">location.lat:</td>
+                <td><input type="text" name="location_lat" id="lat" value="<?php echo $row["location_lat"];?>" /></td>
+            </tr>
+            <tr>
+                <td height="55">location.lng:</td>
+                <td><input type="text" name="location_lng" id="lng" value="<?php echo $row["location_lng"];?>" /></td>
+            </tr>
         </div>
         <tr>
             <td height="55">School number</td>
-          <td><input type="text" name="school_number"  /></td>
+            <td><input type="text" name="school_number" value="<?php echo $row["school_number"];?>" /></td>
         </tr>
         <tr>
             <td height="55">City</td>
-          <td><select name="city" >
-                  <option>اختيار مدينة ...  </option>
-                  <option>نابلس</option>
-                  <option>رام الله</option>
-                  <option>جنين</option>
-                  <option>طولكرم</option>
-                  <option>اريحا</option>
-                  <option>الخليل</option>
-                  <option>القدس</option>
-              </select></td>
+            <td><select name="city" >
+                    <option>اختيار مدينة ...  </option>
+                    <option <?php if($city=="نابلس") echo "selected = 'selected' "?>>نابلس</option>
+                    <option <?php if($city=="رام الله") echo "selected = 'selected' "?>>رام الله</option>
+                    <option <?php if($city=="جنين") echo "selected = 'selected' "?>>جنين</option>
+                    <option <?php if($city=="طولكرم") echo "selected = 'selected' "?>>طولكرم</option>
+                    <option <?php if($city=="اريحا") echo "selected = 'selected' "?>>اريحا</option>
+                    <option <?php if($city=="الخليل") echo "selected = 'selected' "?>>الخليل</option>
+                    <option <?php if($city=="القدس") echo "selected = 'selected' "?>>القدس</option>
+                </select></td>
         </tr>
         <tr>
             <td height="55">Address</td>
-          <td><input type="text" name="address"  /></td>
+            <td><input type="text" name="address" value="<?php echo $row["address"];?>" /></td>
         </tr>
         <tr>
-            <td align="center" colspan="2"><input type="button"  value="Add School" onclick="check()"  /></td>
+            <td align="center" colspan="2"><input type="button"  value="تعديل" onclick="check()"  /></td>
 
         </tr>
     </table>
 </form>
 <div style="float: right ; vertical-align: top" >
-<div id="map-canvas"/>
+    <div id="map-canvas"/>
 
 </div>
-
-
-
-
-
-
 
 
 
