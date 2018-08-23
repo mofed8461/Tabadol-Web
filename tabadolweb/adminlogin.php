@@ -4,7 +4,7 @@ session_start();
 <script language="javascript">
     function red1()
     {
-        window.location = "dashboard.php";
+        window.location = "cbody.php";
     }
     function red2()
     {
@@ -18,25 +18,14 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 
 
-$query = $con->query("select * from users where username = '$username' and password='$password' ");
+$result = $con ->query("select * from users where username = '$username' and password='$password' ");
 
-$count = mysqli_num_rows($query);
+$num = mysqli_num_rows($result);
 
-if($count == 1) {
-
-    $result = $query->fetch_assoc();
-
+if( $num != 0) {
     $_SESSION["username"]=$username;
     $_SESSION["login"] = 1;
-    $_SESSION['permission'] = $result['permission'];
-
-    echo "<h3 align='center'>Thank you..";
-    if ($_SESSION['permission'] == 1)
-    {
-        echo "(admin)";
-    }
-    echo " $username, you will be redirected within 3 seconds </h3> ";
-
+    echo "<h3 align='center'>Thank you..admin. $username, you will be redirected within 3 seconds </h3> ";
     echo "<script>setTimeout('red1()',3000)</script>";
 }
 else {

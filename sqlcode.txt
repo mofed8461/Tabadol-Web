@@ -1,4 +1,4 @@
-
+﻿
 
 
 -- remove DB
@@ -20,11 +20,15 @@ CREATE TABLE `schools` (
   `name` varchar(128) NOT NULL,
   `phone` varchar(16) NOT NULL,
   `manager_name` varchar(128) NOT NULL,
-  `location` varchar(128) NOT NULL,
+  `location_lat` varchar(128) NOT NULL,
+  `location_lng` varchar(200) NOT NULL,
   `school_number` varchar(32) NOT NULL,
   `city` varchar(32) NOT NULL,
   `address` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 
 --
 -- Indexes for dumped tables
@@ -176,8 +180,8 @@ INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Microscope', 'dev_imgs/
 
 INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Vernier Caliper', 'dev_imgs/cp.png', 'ser1443');
 
-
 INSERT INTO `school_dev_data`(`school_id`, `dev_type_id`, `quantity`, `notes`) VALUES (1,1,3,'صالحه للعمل')
+
 
 
 
