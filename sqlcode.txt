@@ -1,4 +1,4 @@
-
+﻿
 
 
 -- remove DB
@@ -175,6 +175,25 @@ INSERT INTO `schools` (`name`, `phone`, `manager_name`, `location`, `school_numb
 INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Microscope', 'dev_imgs/mi.png', 'ser1232');
 
 INSERT INTO `dev_types` (`name`, `img`, `code`) VALUES ('Vernier Caliper', 'dev_imgs/cp.png', 'ser1443');
+
+
+///////////////////////////
+
+
+
+DROP TABLE IF EXISTS `schools`;
+CREATE TABLE IF NOT EXISTS `schools` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `phone` varchar(16) NOT NULL,
+  `manager_name` varchar(128) NOT NULL,
+  `location_lat` varchar(128) NOT NULL,
+  `location_lng` varchar(200) NOT NULL,
+  `school_number` varchar(32) NOT NULL,
+  `city` varchar(32) NOT NULL,
+  `address` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 
 
