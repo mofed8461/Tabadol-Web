@@ -121,7 +121,8 @@ if (isset($_SESSION['permission']))
             Select image to upload:
             <input type="file" name="fileToUpload" id="fileToUpload"><br>
             Code<input type="text" name="code" id="code"><br>
-            <input type="submit" value="Upload Image" name="submit">
+            <input type="submit" value="Upload Image" name="submit"><br />
+            <a href="dashboard.php">عوده</a>
         </form>
         </div>
         </div>
@@ -252,8 +253,14 @@ if (isset($_SESSION['permission']))
 
 
 
-
-
+        if (isset($_SESSION["redirectURL"]))
+        {
+            header("Location: " . $_SESSION["redirectURL"]);
+        }
+        else
+        {
+            header("Location: dashboard.php");
+        }
 
 
 

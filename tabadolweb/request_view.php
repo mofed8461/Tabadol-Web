@@ -3,10 +3,12 @@ session_start();
 include "connect.php";
 
 
+
 if (!isset($_GET['id']))
 {
     header('Location: dashboard.php');
 }
+
 
 
 //id=..&phone=..&name=..&start_time=..&end_time=..&notes=..
@@ -35,6 +37,9 @@ if (!isset($_GET["request_id"]))
 
 $school_id = $_GET["id"];
 $request_id = $_GET["request_id"];
+
+$_SESSION["redirectURL"] = "request_view.php?id=" . $_GET["id"] . "&request_id=" . $_GET["request_id"];
+
 ?>
 
 
