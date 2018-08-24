@@ -137,6 +137,7 @@ p.thicker {
                     SELECT 
                         requests.req_code AS code,
                         request_data.id AS id,
+                        dev_types.id AS dev_id, 
                         dev_types.name AS name, 
                         request_data.quantity AS quantity
                         FROM schools, dev_types, request_data, requests
@@ -152,7 +153,7 @@ p.thicker {
                 {
                     ?>
                         <tr>
-                            <td><?php echo $result["name"]; ?></td>
+                            <td><a href='view_device_info.php?dev_id=<?php echo $result["dev_id"]; ?>'><?php echo $result["name"]; ?></a></td>
                             <td><?php echo $result["quantity"]; ?></td>
 
                             <td>
