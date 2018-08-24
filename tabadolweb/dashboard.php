@@ -46,6 +46,7 @@ if (isset($_SESSION['permission']))
         $count = mysqli_num_rows($query);
         echo "<table border='1px'>";
         echo "<tr>";
+        echo "<th>تعديل</th>";
         echo "<th>اسم المدرسه</th>";
         echo "<th>المدينه</td>";
         echo "<th>اسم المدير/ه</td>";
@@ -56,6 +57,7 @@ if (isset($_SESSION['permission']))
         while ($result = $query->fetch_assoc())
         {
             echo "<tr>";
+            echo "<td><a href='update2.php?id=" . $result["id"] . "'>تعديل</a></td>";
             echo "<td><a href='show_school_info.php?id=" . $result["id"] . "'>" . $result["name"] . "</a></td>";
             echo "<td>" . $result["city"] . "</td>";
             echo "<td>" . $result["manager_name"] . "</td>";
@@ -76,6 +78,8 @@ if (isset($_SESSION['permission']))
         $count = mysqli_num_rows($query);
         echo "<table border='1px'>";
         echo "<tr>";
+        echo "<th>تعديل</th>";
+        echo "<th>عرض الاجهزه</th>";
         echo "<th>اسم المدرسه</th>";
         echo "<th>المدينه</td>";
         echo "<th>اسم المدير/ه</td>";
@@ -83,10 +87,14 @@ if (isset($_SESSION['permission']))
         echo "<th>رقم المدرسه</td>";
         echo "</tr>";
 
+        $school_id = 0;
         while ($result = $query->fetch_assoc())
         {
             echo "<tr>";
-            echo "<td><a href='show_school_info.php?id=" . $result["id"] . "'>" . $result["name"] . "</a></td>";
+            echo "<td><a href='update2.php?id=" . $result["id"] . "'>تعديل</a></td>";
+            echo "<td><a href='show_school_info.php?id=" . $result["id"] . "'>عرض الاجهزه</a></td>";
+            $school_id = $result["id"];
+            echo "<td>" . $result["name"] . "</td>";
             echo "<td>" . $result["city"] . "</td>";
             echo "<td>" . $result["manager_name"] . "</td>";
             echo "<td>" . $result["phone"] . "</td>";
@@ -94,6 +102,44 @@ if (isset($_SESSION['permission']))
             echo "</tr>";
         }
         echo "</table>";
+        ?>
+
+        <h4>طلبات الاستقراض</h4>
+        <br />
+        <table border="1px">
+            <tr>
+                <th>اسم الشخص</th>
+                <th>رقم الشخص</th>
+                <th>من</th>
+                <th>الى</th>
+                <th>ملاحظات</th>
+                <th>اظهار</th>
+            </tr>
+            <?php
+
+                $query = $con->query("SELECT * FROM requests where requests.school_id=" . $school_id);
+                while ($result = $query->fetch_assoc())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $result["name"]; ?></td>
+                        <td><?php echo $result["phone"]; ?></td>
+                        <td><?php echo $result["start_time"]; ?></td>
+                        <td><?php echo $result["end_time"]; ?></td>
+                        <td><?php echo $result["notes"]; ?></td>
+                        <td><a href="request_view.php?id=<?php echo $school_id; ?>&request_id=<?php echo $result["id"]; ?>">اظهار</a></td>
+
+                    </tr>
+
+                    <?php
+                }
+
+            ?>
+        </table>
+
+        <?php
+
+        echo "<br /><a href='request.php?id=" . $school_id . "'>اضافه طلب استقراض</a><br />";
 
     }
 }
