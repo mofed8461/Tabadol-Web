@@ -76,7 +76,7 @@ if (isset($_GET['id']) && isset($_GET['request_id']))
 
 
 
-    $con->query("UPDATE requests SET req_code='done' WHERE id=" . $_GET['request_id']);
+    $con->query("UPDATE requests SET req_code='published' WHERE id=" . $_GET['request_id']);
 
     //header('Location: request_view.php?id=' . $_GET['id'] . '&request_id=' . $_GET['request_id']);
 

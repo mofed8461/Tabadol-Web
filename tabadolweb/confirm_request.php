@@ -6,6 +6,13 @@ include "connect.php";
 
 if (isset($_GET["id"]))
 {
+	$query2 = $con->query("SELECT * FROM requests WHERE id=" . $_GET['request_id']);
+	$result2 = $query2->fetch_assoc();
+
+	if ($result2 == NULL || $result2["req_code"] == "completed")
+	{
+		header("Location: invitation_ended.php");
+	}
 
  	$query = $con->query("SELECT * FROM schools WHERE id=" . $_GET['id']);
 	$result = $query->fetch_assoc();
@@ -19,7 +26,7 @@ if (isset($_GET["id"]))
 			<title>HTML email</title>
 			</head>
 			<body>
-				<a href='confirm2.php?id=" . $_GET["id"] . "&id2=" . $result["id"] . "&request_id=" . $_GET["request_id"] . "&name=" . $_GET["name"] + "&phone=" + $_GET["phone"] + "&notes=" + $_GET["notes"] + "'>لقد قبلت مدرسة " . $result2["name"] . " دعوتكم اضغط هنا للموافقة</a>
+				<a href='confirm2.php?id=" . $_GET["id"] . "&id2=" . $$_GET["id2"] . "&request_id=" . $_GET["request_id"] . "&name=" . $_GET["name"] . "&phone=" . $_GET["phone"] . "&notes=" . $_GET["notes"] . "'>لقد قبلت مدرسة " . $result2["name"] . " دعوتكم اضغط هنا للموافقة</a>
 			</body>
 			</html>
 			";

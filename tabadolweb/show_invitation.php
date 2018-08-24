@@ -12,7 +12,7 @@ if (isset($_GET['id']) && isset($_GET['id2']) && isset($_GET['request_id']))
 	$query2 = $con->query("SELECT * FROM requests WHERE id=" . $_GET['request_id']);
 	$result2 = $query2->fetch_assoc();
 
-	if ($result2 == NULL)
+	if ($result2 == NULL || $result2["req_code"] == "completed")
 	{
 		header("Location: invitation_ended.php");
 	}
