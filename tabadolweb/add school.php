@@ -49,6 +49,7 @@
             var school_number   = document.addform.school_number.value;
             var city           = document.addform.city.value;
             var address       = document.addform.address.value;
+            var email       = document.addform.email.value;
 
 
             if( school_name =="")
@@ -58,6 +59,10 @@
             else if(manager_name == "")
             {
                 alert("Error: please enter 'manager name'");
+            }
+            else if(email == "")
+            {
+                alert("Error: please enter 'Email'");
             }
             else if(phone == "")
             {
@@ -110,6 +115,10 @@
         <tr>
             <td height="55">Manager name</td>
           <td><input type="text" name="manager_name"  /></td>
+        </tr>
+        <tr>
+            <td height="55">Email</td>
+          <td><input type="text" name="email"  /></td>
         </tr>
         <tr>
             <td height="55">Phone number</td>
