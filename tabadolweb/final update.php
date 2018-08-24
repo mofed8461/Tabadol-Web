@@ -8,17 +8,16 @@ $location_lng = $_POST["location_lng"];
 $school_number= $_POST["school_number"];
 $city         = $_POST["city"];
 $address      = $_POST["address"];
-$email        =$_POST["email"];
 $id = $_POST["id"];
 
 
 include("connect.php");
 
 $con ->query("update schools  set  name='$school_name',phone='$phone',manager_name='$manager_name',location_lat='$location_lat',location_lng='$location_lng',
-school_number='$school_number',city='$city',address='$address',email='$email' where id = '$id'") or die("Error in updating data");
+school_number='$school_number',city='$city',address='$address' where id = '$id'") or die("Error in updating data");
 echo "<h2 align='center'>تم تعديل معلومات المدرسة ....</h2>";
 
 ?>
 <script language="javascript">
-    setTimeout("window.location='dashboard.php'",'3000');
+    setTimeout("window.location='update school.php'",'3000');
 </script>

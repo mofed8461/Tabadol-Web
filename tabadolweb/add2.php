@@ -8,13 +8,12 @@ $location_lng = $_POST["location_lng"];
 $school_number= $_POST["school_number"];
 $city         = $_POST["city"];
 $address      = $_POST["address"];
-$email        =$_POST["email"];
 
 
 include("connect.php");
 
 $con ->query("insert into schools  set  name='$school_name',phone='$phone',manager_name='$manager_name',location_lat='$location_lat',location_lng='$location_lng',
-school_number='$school_number',city='$city',address='$address',email='$email'") or die("Error in inserting data");
+school_number='$school_number',city='$city',address='$address'") or die("Error in inserting data");
 echo "<h2 align='center'>Thank you , one School is added</h2>";
 
 ?>

@@ -43,12 +43,11 @@
         {
             var school_name     = document.addform.school_name.value;
             var manager_name    = document.addform.manager_name.value;
-            var phone           = document.addform.phone.value;
+            var phone    = document.addform.phone.value;
             var lat             = document.addform.location_lat.value;
             var school_number   = document.addform.school_number.value;
-            var city            = document.addform.city.value;
-            var address         = document.addform.address.value;
-            var email           = document.addform.email.value;
+            var city           = document.addform.city.value;
+            var address       = document.addform.address.value;
 
 
             if( school_name =="")
@@ -58,10 +57,6 @@
             else if(manager_name == "")
             {
                 alert("خطا : الرجاء ادخال اسم المدير.");
-            }
-            else if(email == "")
-            {
-                alert("خطا : الرجاء ادخال عنوان البريد الالكتروني.");
             }
             else if(phone == "")
             {
@@ -121,10 +116,6 @@ $id1 = $row["id"];
         <tr>
             <td height="55">Manager name</td>
             <td><input type="text" name="manager_name" value="<?php echo $row["manager_name"];?>" /></td>
-        </tr>
-        <tr>
-            <td height="55">Email</td>
-            <td><input type="text" name="email" value="<?php echo $row["email"];?>"  /></td>
         </tr>
         <tr>
             <td height="55">Phone number</td>
