@@ -45,7 +45,7 @@ if (isset($_GET["phone2"]))
 				<title>HTML email</title>
 				</head>
 				<body>
-					<a href='dashboard.php'>تم الاتفاق على طلب الاقراض يمكنك رؤويه العملية اضغط هنا</a>
+					<a href='http://" . dirname($_SERVER['SERVER_N)AME'] . $_SERVER['REQUEST_URI']) . "/dashboard.php'>تم الاتفاق على طلب الاقراض يمكنك رؤويه العملية اضغط هنا</a>
 				</body>
 				</html>
 				";

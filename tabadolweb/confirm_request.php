@@ -26,7 +26,7 @@ if (isset($_GET["id"]))
 			<title>HTML email</title>
 			</head>
 			<body>
-				<a href='confirm2.php?id=" . $_GET["id"] . "&id2=" . $$_GET["id2"] . "&request_id=" . $_GET["request_id"] . "&name=" . $_GET["name"] . "&phone=" . $_GET["phone"] . "&notes=" . $_GET["notes"] . "'>لقد قبلت مدرسة " . $result2["name"] . " دعوتكم اضغط هنا للموافقة</a>
+				<a href='http://" . dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']) . "/confirm2.php?id=" . $_GET["id"] . "&id2=" . $$_GET["id2"] . "&request_id=" . $_GET["request_id"] . "&name=" . $_GET["name"] . "&phone=" . $_GET["phone"] . "&notes=" . $_GET["notes"] . "'>لقد قبلت مدرسة " . $result2["name"] . " دعوتكم اضغط هنا للموافقة</a>
 			</body>
 			</html>
 			";
