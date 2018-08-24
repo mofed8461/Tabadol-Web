@@ -44,7 +44,7 @@ if (isset($_GET['id']) && isset($_GET['request_id']))
 			<title>HTML email</title>
 			</head>
 			<body>
-				<a href='show_invitation.php?id=" . $_GET["id"] . "&id2=" . $result["id"] . "&request_id=" . $_GET["request_id"] . "'>اظهار الدعوة</a>
+				<a href='http://" . dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']) . "/show_invitation.php?id=" . $_GET["id"] . "&id2=" . $result["id"] . "&request_id=" . $_GET["request_id"] . "'>اظهار الدعوة</a>
 			</body>
 			</html>
 			";
