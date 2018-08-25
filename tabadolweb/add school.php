@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -80,6 +83,10 @@
             {
                 alert("خطا : لارجاء ادخال رقم المدرسة.");
             }
+            else if(school_number.length != 8)
+            {
+                alert("خطا : الرقم الوطني يجب ان يكون 8 خانات.");
+            }
             else if (city == "")
             {
                 alert("خطا : الرجاء ادخال المدينة.");
@@ -88,7 +95,6 @@
             {
                 alert("خطا الرجاء ادخال العنوان.");
             }
-
             else
             {
                 document.addform.submit();
@@ -109,7 +115,7 @@
 
         <tr>
             <td height="55">اسم المدرسة</td>
-          <td><input type="text" name="school_name" pattern=[أ-يa-zA-Z] /></td>
+          <td><input type="text" name="school_name" pattern=[أ-يa-zA-Z] <?php if ($_SESSION["permission"] == 2) echo "disabled"; ?> /></td>
         </tr>
 
         <tr>
@@ -125,7 +131,7 @@
             <td><input type="text" name="phone"  /></td>
         </tr>
         <div class="coordenadas">
-        <tr><td> <span>Google Maps coordinates</span></td></tr>
+        <tr><td> <span>Google Maps احداثيات الخريطه</span></td></tr>
         <tr>
             <td height="55">location.lat:</td>
           <td><input type="text" name="location_lat" id="lat" value="0" /></td>
@@ -136,8 +142,8 @@
         </tr>
         </div>
         <tr>
-            <td height="55">رقم المدرسة</td>
-          <td><input type="text" name="school_number"  /></td>
+            <td height="55">رقم المدرسة الوطني</td>
+          <td><input type="text" name="school_number" <?php if ($_SESSION["permission"] == 2) echo "disabled"; ?> /></td>
         </tr>
         <tr>
             <td height="55">المدينة</td>

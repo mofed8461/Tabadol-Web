@@ -132,7 +132,7 @@ while ($result = $query->fetch_assoc())
 
 
 
-    echo "<a onclick=\"setSelected(" . $result['id'] . ", '" . $result['name'] . "');\">" . $result['name'] . "<img width='32px' height='32px' id='img_" . $result['id'] . "' src='" . $result['img'] . "' /></a>";
+    echo "<a onclick=\"setSelected(" . $result['id'] . ", '" . $result['name'] . "');\" tags='" . $result['tags'] . "'>" . $result['name'] . "<img width='32px' height='32px' id='img_" . $result['id'] . "' src='" . $result['img'] . "' /></a>";
 
 
 
@@ -171,7 +171,7 @@ $result = $query->fetch_assoc();
             for (i = 0; i < a.length; i++) {
                 if (a[i].innerHTML != "Add")
                 {
-                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1 || a[i].getAttribute('tags').toUpperCase().indexOf(filter) > -1) {
                         a[i].style.display = "";
                         enableAdd = false;
 

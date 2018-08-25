@@ -121,7 +121,8 @@ if (isset($_SESSION['permission']))
             Select image to upload:
             <input type="file" name="fileToUpload" id="fileToUpload"><br>
             Code<input type="text" name="code" id="code"><br>
-            <input type="submit" value="Upload Image" name="submit"><br />
+            Tags<input type="text" name="tags" id="tags"><br>
+            <input type="submit" value="اضافه" name="submit"><br />
             <a href="dashboard.php">عوده</a>
         </form>
         </div>
@@ -208,7 +209,7 @@ if (isset($_SESSION['permission']))
 
                 if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
                 {
-                    $con->query("INSERT INTO dev_types (`name`, `img`, `code`) VALUES ('" . $_GET["add2"] . "', '" . $target_file . "', '" . $_POST["code"] . "')");
+                    $con->query("INSERT INTO dev_types (`name`, `img`, `code`, `tags`) VALUES ('" . $_GET["add2"] . "', '" . $target_file . "', '" . $_POST["code"] . "', '" . $_POST["tags"] . "')");
 
                     echo "Added Successfully";
                     ?>
