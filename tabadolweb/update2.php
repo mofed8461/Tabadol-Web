@@ -164,8 +164,8 @@ $id1 = $row["id"];
             <td><input type="text" name="address" value="<?php echo $row["address"];?>" /></td>
         </tr>
         <tr>
-            <td align="center" colspan="2"><input type="button"  value="تعديل" onclick="check()"  /></td>
-
+            <td align="center" colspan="1"><input type="button"  value="تعديل" onclick="check()"  /></td>
+            <td align="center"><button style="align-content: center ; color: dimgray"><a href="dashboard.php" style="color: black">عودة</a> </button></td>
         </tr>
     </table>
 </form>

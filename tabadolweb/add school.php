@@ -54,39 +54,39 @@
 
             if( school_name =="")
             {
-                alert("Error: please enter 'school name'");
+                alert("خطا : الرجاء ادخال اسم المدرسة.");
             }
             else if(manager_name == "")
             {
-                alert("Error: please enter 'manager name'");
+                alert("خطا : الرجاء ادخال اسم الادارة.");
             }
             else if(email == "")
             {
-                alert("Error: please enter 'Email'");
+                alert("خطا : الرجاء ادخال عنوان البريد الالكتروني.");
             }
             else if(phone == "")
             {
-                alert("Error: please enter 'phone number '");
+                alert("خطا : الرجاء ادخال رقم الهاتف.");
             }
             else if ( lat == 0)
             {
-                alert("Error: please pin place in map ");
+                alert("خطا : الرجاء تعيين الموقع على الخريطه. ");
             }
             else if ( lng == 0)
             {
-                alert("Error: please pin place in map ");
+                alert("خطا : الرجاء تعيين الموقع على الخريطه.");
             }
             else if(school_number == "" )
             {
-                alert("Error: please enter 'school_number'");
+                alert("خطا : لارجاء ادخال رقم المدرسة.");
             }
             else if (city == "")
             {
-                alert("Error: please enter 'city'");
+                alert("خطا : الرجاء ادخال المدينة.");
             }
             else if(address == "")
             {
-                alert("Error: please enter 'address'");
+                alert("خطا الرجاء ادخال العنوان.");
             }
 
             else
@@ -101,27 +101,27 @@
 
 <body>
 
-<div align="center" style="background-color:#666"><h2> Add school to data base</h2></div>
+<div align="center" style="background-color:#666"><h2> اضافة مدرسة جديدة</h2></div>
 
 <form name="addform" method="post" action="add2.php" accept-charset="utf-8">
     <table align="left" style="margin-left: 10px;">
 
 
         <tr>
-            <td height="55">School name</td>
+            <td height="55">اسم المدرسة</td>
           <td><input type="text" name="school_name" pattern=[أ-يa-zA-Z] /></td>
         </tr>
 
         <tr>
-            <td height="55">Manager name</td>
+            <td height="55">اسم الادارة</td>
           <td><input type="text" name="manager_name"  /></td>
         </tr>
         <tr>
-            <td height="55">Email</td>
+            <td height="55">البريد الالكتروني</td>
           <td><input type="text" name="email"  /></td>
         </tr>
         <tr>
-            <td height="55">Phone number</td>
+            <td height="55">رقم الهاتف</td>
             <td><input type="text" name="phone"  /></td>
         </tr>
         <div class="coordenadas">
@@ -136,11 +136,11 @@
         </tr>
         </div>
         <tr>
-            <td height="55">School number</td>
+            <td height="55">رقم المدرسة</td>
           <td><input type="text" name="school_number"  /></td>
         </tr>
         <tr>
-            <td height="55">City</td>
+            <td height="55">المدينة</td>
           <td><select name="city" >
                   <option>اختيار مدينة ...  </option>
                   <option>نابلس</option>
@@ -153,15 +153,17 @@
               </select></td>
         </tr>
         <tr>
-            <td height="55">Address</td>
+            <td height="55">العنوان</td>
           <td><input type="text" name="address"  /></td>
         </tr>
         <tr>
-            <td align="center" colspan="2"><input type="button"  value="Add School" onclick="check()"  /></td>
-
+            <td align="center" colspan="1"><input align="middle" type="button"  value="اضافة" onclick="check()"  /></td>
+<td align="center"><button style="align-content: center ; color: dimgray"><a href="dashboard.php" style="color: black">عودة</a> </button></td>
         </tr>
+		
     </table>
 </form>
+
 <div style="float: right ; vertical-align: top" >
 <div id="map-canvas"/>
 
