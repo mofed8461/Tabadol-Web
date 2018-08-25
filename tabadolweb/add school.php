@@ -164,6 +164,8 @@
     </table>
 </form>
 
+
+
 <div style="float: right ; vertical-align: top" >
 <div id="map-canvas"/>
 

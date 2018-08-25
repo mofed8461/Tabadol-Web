@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -169,6 +172,46 @@ $id1 = $row["id"];
         </tr>
     </table>
 </form>
+
+ <form name="pwform" method="post" action="change_password.php" accept-charset="utf-8">
+    <table>
+        <?php 
+        if (isset($_SESSION["permission"]) && $_SESSION["permission"] == 2)
+        { 
+        ?>
+        <tr>
+            <td height="55">كلمه المرور القديمة</td>
+            <td><input type="hidden" name="id" value="<?php echo $id; ?>" /><input type="text" name="password"  /></td>
+        </tr>
+        <tr>
+            <td height="55">كلمه المرور الجديده</td>
+            <td><input type="text" name="password_1"  /></td>
+        </tr>
+        <tr>
+            <td height="55">تأكيد كلمه المرور</td>
+            <td><input type="text" name="password_2"  /></td>
+        </tr>
+        <tr>
+            <td height="55"></td>
+            <td><input type="submit" value="تغيير" /></td>
+        </tr>
+        <?php 
+        }
+        else if (isset($_SESSION["permission"]) && $_SESSION["permission"] == 1)
+        {
+        ?>
+        <tr>
+            <td height="55"></td>
+            <td><input type="hidden" name="reset" value="1" /><input type="hidden" name="id" value="<?php echo $id; ?>" /><input type="submit" value="استعاده كلمه المرور" /></td>
+        </tr>
+        <?php
+        }
+        ?>
+
+
+    </table>
+</form>
+
 <div style="float: right ; vertical-align: top" >
     <div id="map-canvas"/>
 
