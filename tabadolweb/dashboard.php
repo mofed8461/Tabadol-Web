@@ -67,6 +67,76 @@ if (isset($_SESSION['permission']))
         }
         echo "</table>";
 
+        ?>
+
+        <h4>عرض الاستقراضات الحالية</h4>
+        <br />
+        <table border="1px">
+            <tr>
+                <th>اسم المدرسه الطالبه</th>
+                <th>اسم المدرسه المعطية</th>
+                <th>اسم الشخص الطالب</th>
+                <th>رقم الشخص الطالب</th>
+                <th>اسم الشخص المعطي</th>
+                <th>رقم الشخص المعطي</th>
+                <th>تاريخ الاقراض</th>
+                <th>تاريخ الترجيع</th>
+                <th>ملاحظات</th>
+                <th>اظهار الطلب</th>
+            </tr>
+            <?php
+
+                $query = $con->query("
+                    SELECT 
+                    sc1.id AS school_id,
+                    sc1.name AS ask, 
+                    sc2.name AS give, 
+                    transactions.phone_1 AS p1,
+                    transactions.phone_2 AS p2,
+                    transactions.name_1 AS n1,
+                    transactions.name_2 AS n2,
+                    transactions.request_id AS rid,
+                    requests.start_time AS st,
+                    requests.end_time AS ed,
+                    requests.notes AS notes
+                    FROM
+                    transactions, 
+                    schools AS sc1, 
+                    schools AS sc2,
+                    requests
+                    WHERE 
+                    transactions.school_1_id=sc1.id AND 
+                    transactions.school_2_id=sc2.id AND
+                    requests.id=transactions.request_id
+                    ");
+
+
+                while ($result = $query->fetch_assoc())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $result["ask"]; ?></td>
+                        <td><?php echo $result["give"]; ?></td>
+                        <td><?php echo $result["n1"]; ?></td>
+                        <td><?php echo $result["p1"]; ?></td>
+                        <td><?php echo $result["n2"]; ?></td>
+                        <td><?php echo $result["p2"]; ?></td>
+                        <td><?php echo $result["st"]; ?></td>
+                        <td><?php echo $result["ed"]; ?></td>
+                        <td><?php echo $result["notes"]; ?></td>
+                        <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
+
+                    </tr>
+
+                    <?php
+                }
+
+            ?>
+        </table>
+
+
+        <?php
+
 
     }
     else if ($_SESSION['permission'] == 2)
@@ -117,7 +187,7 @@ if (isset($_SESSION['permission']))
             </tr>
             <?php
 
-                $query = $con->query("SELECT * FROM requests where requests.school_id=" . $school_id);
+                $query = $con->query("SELECT * FROM requests where requests.school_id=" . $school_id . " AND requests.req_code!='completed'");
                 while ($result = $query->fetch_assoc())
                 {
                     ?>
@@ -140,6 +210,78 @@ if (isset($_SESSION['permission']))
         <?php
 
         echo "<br /><a href='request.php?id=" . $school_id . "'>اضافه طلب استقراض</a><br />";
+
+        ?>
+
+
+        <h4>عرض الاستقراضات الحالية</h4>
+        <br />
+        <table border="1px">
+            <tr>
+                <th>اسم المدرسه الطالبه</th>
+                <th>اسم المدرسه المعطية</th>
+                <th>اسم الشخص الطالب</th>
+                <th>رقم الشخص الطالب</th>
+                <th>اسم الشخص المعطي</th>
+                <th>رقم الشخص المعطي</th>
+                <th>تاريخ الاقراض</th>
+                <th>تاريخ الترجيع</th>
+                <th>ملاحظات</th>
+                <th>اظهار الطلب</th>
+            </tr>
+            <?php
+
+                $query = $con->query("
+                    SELECT 
+                    sc1.name AS ask, 
+                    sc2.name AS give, 
+                    transactions.phone_1 AS p1,
+                    transactions.phone_2 AS p2,
+                    transactions.name_1 AS n1,
+                    transactions.name_2 AS n2,
+                    transactions.request_id AS rid,
+                    requests.start_time AS st,
+                    requests.end_time AS ed,
+                    requests.notes AS notes
+                    FROM
+                    transactions, 
+                    schools AS sc1, 
+                    schools AS sc2,
+                    requests
+                    WHERE 
+                    transactions.school_1_id=sc1.id AND 
+                    transactions.school_2_id=sc2.id AND
+                    (sc1.id=" . $school_id . " OR sc2.id=" . $school_id . ") AND
+                    requests.id=transactions.request_id
+                    ");
+
+
+                while ($result = $query->fetch_assoc())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $result["ask"]; ?></td>
+                        <td><?php echo $result["give"]; ?></td>
+                        <td><?php echo $result["n1"]; ?></td>
+                        <td><?php echo $result["p1"]; ?></td>
+                        <td><?php echo $result["n2"]; ?></td>
+                        <td><?php echo $result["p2"]; ?></td>
+                        <td><?php echo $result["st"]; ?></td>
+                        <td><?php echo $result["ed"]; ?></td>
+                        <td><?php echo $result["notes"]; ?></td>
+                        <td><a href="request_view.php?id=<?php echo $school_id; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
+
+                    </tr>
+
+                    <?php
+                }
+
+            ?>
+        </table>
+
+
+
+        <?php
 
     }
 }

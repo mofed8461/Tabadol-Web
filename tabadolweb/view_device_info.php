@@ -34,31 +34,28 @@ include "connect.php";
 <?php
 
 
-if (isset($_SESSION['permission']) && isset($_GET["id"]))
+if (isset($_GET["dev_id"]))
 {
 
     
   
         
-        $query = $con->query("select dev_types.name as name, school_dev_data.quantity as quantity, school_dev_data.notes as notes from schools, dev_types, school_dev_data where schools.id=school_dev_data.school_id and school_dev_data.dev_type_id=dev_types.id and schools.id=" . $_GET["id"]) or die($con->error);
+        $query = $con->query("SELECT * FROM dev_types where dev_types.id=" . $_GET["dev_id"]) or die($con->error);
 
         $count = mysqli_num_rows($query);
         echo "<table border='1px'>";
         echo "<tr>";
         echo "<th>اسم القطعة</th>";
-        echo "<th>النوع</th>";
-        echo "<th>ملاحظات</th>";
-      
+        echo "<th>الكود</th>";
+        echo "<th>الصوره</th>";
         echo "</tr>";
 
         while ($result = $query->fetch_assoc())
         {
             echo "<tr>";
             echo "<td>" . $result["name"] . "</td>";
-            echo "<td>" . $result["quantity"] . "</td>";
-            echo "<td>" . $result["notes"] . "</td>";
-            
-       
+            echo "<td>" . $result["code"] . "</td>";
+            echo "<td><img src='" . $result["img"] . "' /></td>";
             echo "</tr>";
         }
         echo "</table>";
@@ -71,11 +68,19 @@ else
     echo "<script>window.location = 'index.php';</script>";
 }
 
-
-
+if (isset($_SESSION["redirectURL"]))
+{
 ?>
-<a href="add_school_devices.php">اضافه اجهزه</a><br />
+<a href="<?php echo $_SESSION["redirectURL"]; ?>">عوده</a>
+<?php
+}
+else
+{
+?>
 <a href="dashboard.php">عوده</a>
+<?php
+}
+?>
 </div>
 </div>
 </body>

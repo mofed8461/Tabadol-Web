@@ -228,7 +228,8 @@ $result = $query->fetch_assoc();
         الكميه
         <input id="quantity" type="number" />
         <br />
-        <button onclick="submit();">اضافه</button>
+        <button onclick="submit();">اضافه</button><br />
+        <a href="dashboard.php">عوده</a>
 
     </div>
 </div>

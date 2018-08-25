@@ -3,10 +3,15 @@ session_start();
 include "connect.php";
 
 
+$_SESSION["redirectURL"] = "add_school_devices.php";
+
 if (isset($_GET['id']))
 {
     $con->query("INSERT INTO school_dev_data (school_id, dev_type_id, quantity, notes) VALUES ('" . $_GET['id'] . "', '" . $_GET['dev_id'] . "', '" . $_GET['quantity'] . "', '" . $_GET['notes'] . "')");
+
+    $_SESSION["redirectURL"] = "add_school_devices.php?id=" . $_GET["id"];
 }
+
 
 
 $query = $con->query("select * from dev_types");
@@ -234,7 +239,8 @@ $result = $query->fetch_assoc();
         ملاحظات
         <input id="notes" type="text" />
         <br />
-        <button onclick="submit();">اضافه</button>
+        <button onclick="submit();">اضافه</button><br />
+        <a href="dashboard.php">عوده</a>
 
     </div>
 </div>
