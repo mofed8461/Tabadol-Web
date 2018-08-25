@@ -94,6 +94,7 @@
         </form>
     <div align="center">
         <?php
+        $school_id=0;
         if( isset($_POST["city"]) )
         {
             $city = $_POST["city"];
@@ -106,6 +107,7 @@
                 $school_name = $row["name"];
                 $address   = $row["address"];
                 $id        = $row["id"];
+                $school_id = $id;
                 echo "<tr><td>
 	  
 	<div>اسم المدرسة :اسم المدرسة $school_name</div>
@@ -116,6 +118,9 @@
             echo "</table>";
         }
         ?>
+
+
+       
     </div>
 
 

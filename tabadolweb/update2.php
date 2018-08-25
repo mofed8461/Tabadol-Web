@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -76,6 +79,10 @@
             {
                 alert("خطا: الرجاء ادخال رقم المدرسة.");
             }
+            else if(school_number.length != 8)
+            {
+                alert("خطا : الرقم الوطني يجب ان يكون 8 خانات.");
+            }
             else if (city == "")
             {
                 alert("خطا: الرجاء ادخال اسم المدينة.");
@@ -115,11 +122,11 @@ $id1 = $row["id"];
     <table align="left" style="margin-left: 10px;">
 
         <tr>
-            <td height="55">School name</td>
-            <td><input type="text" name="school_name" value="<?php echo $row["name"];?>" /></td>
+            <td height="55">اسم المدرسه</td>
+            <td><input type="text" name="school_name" value="<?php echo $row["name"];?>" <?php if ($_SESSION["permission"] == 2) echo "disabled"; ?> /></td>
         </tr>
         <tr>
-            <td height="55">Manager name</td>
+            <td height="55">اسم المدير/مديره</td>
             <td><input type="text" name="manager_name" value="<?php echo $row["manager_name"];?>" /></td>
         </tr>
         <tr>
@@ -127,12 +134,12 @@ $id1 = $row["id"];
             <td><input type="text" name="email" value="<?php echo $row["email"];?>"  /></td>
         </tr>
         <tr>
-            <td height="55">Phone number</td>
+            <td height="55">رقم الهاتف</td>
             <td><input type="text" name="phone" value="<?php echo $row["phone"];?>" /></td>
         </tr>
 
         <div class="coordenadas">
-            <tr><td> <span>Google Maps coordinates</span></td></tr>
+            <tr><td> <span>Google Maps احداثيات الخريطه</span></td></tr>
             <tr>
                 <td height="55">location.lat:</td>
                 <td><input type="text" name="location_lat" id="lat" value="<?php echo $row["location_lat"];?>" /></td>
@@ -143,11 +150,11 @@ $id1 = $row["id"];
             </tr>
         </div>
         <tr>
-            <td height="55">School number</td>
-            <td><input type="text" name="school_number" value="<?php echo $row["school_number"];?>" /></td>
+            <td height="55">الرقم المدرسه الوطني</td>
+            <td><input type="text" name="school_number" value="<?php echo $row["school_number"];?>" <?php if ($_SESSION["permission"] == 2) echo "disabled"; ?> /></td>
         </tr>
         <tr>
-            <td height="55">City</td>
+            <td height="55">المدينه</td>
             <td><select name="city" >
                     <option>اختيار مدينة ...  </option>
                     <option <?php if($city=="نابلس") echo "selected = 'selected' "?>>نابلس</option>
@@ -160,7 +167,7 @@ $id1 = $row["id"];
                 </select></td>
         </tr>
         <tr>
-            <td height="55">Address</td>
+            <td height="55">العنوان</td>
             <td><input type="text" name="address" value="<?php echo $row["address"];?>" /></td>
         </tr>
         <tr>
@@ -169,6 +176,46 @@ $id1 = $row["id"];
         </tr>
     </table>
 </form>
+
+ <form name="pwform" method="post" action="change_password.php" accept-charset="utf-8">
+    <table>
+        <?php 
+        if (isset($_SESSION["permission"]) && $_SESSION["permission"] == 2)
+        { 
+        ?>
+        <tr>
+            <td height="55">كلمه المرور القديمة</td>
+            <td><input type="hidden" name="id" value="<?php echo $id; ?>" /><input type="password" name="password"  /></td>
+        </tr>
+        <tr>
+            <td height="55">كلمه المرور الجديده</td>
+            <td><input type="password" name="password_1"  /></td>
+        </tr>
+        <tr>
+            <td height="55">تأكيد كلمه المرور</td>
+            <td><input type="password" name="password_2"  /></td>
+        </tr>
+        <tr>
+            <td height="55"></td>
+            <td><input type="submit" value="تغيير" /></td>
+        </tr>
+        <?php 
+        }
+        else if (isset($_SESSION["permission"]) && $_SESSION["permission"] == 1)
+        {
+        ?>
+        <tr>
+            <td height="55"></td>
+            <td><input type="hidden" name="reset" value="1" /><input type="hidden" name="id" value="<?php echo $id; ?>" /><input type="submit" value="استعاده كلمه المرور" /></td>
+        </tr>
+        <?php
+        }
+        ?>
+
+
+    </table>
+</form>
+
 <div style="float: right ; vertical-align: top" >
     <div id="map-canvas"/>
 

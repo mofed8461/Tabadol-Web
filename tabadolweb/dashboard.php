@@ -238,6 +238,8 @@ if (isset($_SESSION['permission']))
                     SELECT 
                     sc1.name AS ask, 
                     sc2.name AS give, 
+                    sc1.id AS id1, 
+                    sc2.id AS id2, 
                     transactions.phone_1 AS p1,
                     transactions.phone_2 AS p2,
                     transactions.name_1 AS n1,
@@ -263,8 +265,8 @@ if (isset($_SESSION['permission']))
                 {
                     ?>
                     <tr>
-                        <td><?php echo $result["ask"]; ?></td>
-                        <td><?php echo $result["give"]; ?></td>
+                        <td><a href="view_school_info.php?id=<?php echo $result["id1"]; ?>"><?php echo $result["ask"]; ?></a></td>
+                        <td><a href="view_school_info.php?id=<?php echo $result["id2"]; ?>"><?php echo $result["give"]; ?></a></td>
                         <td><?php echo $result["n1"]; ?></td>
                         <td><?php echo $result["p1"]; ?></td>
                         <td><?php echo $result["n2"]; ?></td>
