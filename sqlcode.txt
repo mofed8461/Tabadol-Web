@@ -61,7 +61,7 @@ ALTER TABLE `schools`
 
 
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `TabadolWeb`.`users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
@@ -72,7 +72,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 
 
-
+CREATE TABLE IF NOT EXISTS `TabadolWeb`.`news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(40) NOT NULL,
+  `text` varchar(4000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
 

@@ -136,8 +136,12 @@ if (isset($_SESSION['permission']))
 
             ?>
         </table>
-
-
+        <h4>الاخبار</h4>
+        <br />
+        <iframe src="news.php">
+              <p>Your browser does not support iframes.</p>
+        </iframe>
+        <br />
         <?php
 
 
@@ -209,7 +213,7 @@ if (isset($_SESSION['permission']))
 
             ?>
         </table>
-
+        
         <?php
 
         echo "<br /><a href='request.php?id=" . $school_id . "'>اضافه طلب استقراض</a><br />";
@@ -284,7 +288,13 @@ if (isset($_SESSION['permission']))
             ?>
         </table>
 
+        <h4>الاخبار<h4>
+        <br />
 
+        <iframe src="news.php">
+              <p>Your browser does not support iframes.</p>
+        </iframe>
+        <br />
 
         <?php
 
