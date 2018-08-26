@@ -79,12 +79,10 @@ session_start();
 
 <body>
 
-<div align="center" style="background-color:#666"><h2> اضافة مدرسة جديدة</h2></div>
+<div align="center" style="background-color:#666"><h2> اضافة مستخدم جديد</h2></div>
 
 <form name="addform" method="post" action="adduser2.php" accept-charset="utf-8">
     <table align="center" style="margin-left: 35%;">
-
-
 
 
         <tr>
@@ -114,14 +112,6 @@ session_start();
 
     </table>
 </form>
-
-
-
-
-
-
-
-
 
 
 
