@@ -67,7 +67,8 @@ if (isset($_SESSION['permission']))
         }
         echo "</table>";
 
-        echo"<div> <a href='add%20school.php' > اضافة مدرسة جديدة </a> </div>"
+        echo"<div> <a href='add%20school.php' > اضافة مدرسة جديدة </a> </div>";
+        echo"<div> <a href='adduser.php' > اضافة مستخدم جديد </a> </div>";
 
         ?>
 
