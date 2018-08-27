@@ -92,6 +92,8 @@ if (isset($_SESSION['permission']))
                 <th>تاريخ الترجيع</th>
                 <th>ملاحظات</th>
                 <th>اظهار الطلب</th>
+                <th>حذف الطلب</th>
+
             </tr>
             <?php
 
@@ -100,6 +102,7 @@ if (isset($_SESSION['permission']))
                     sc1.id AS school_id,
                     sc1.name AS ask, 
                     sc2.name AS give, 
+                    transactions.id AS tid,
                     transactions.phone_1 AS p1,
                     transactions.phone_2 AS p2,
                     transactions.name_1 AS n1,
@@ -134,6 +137,7 @@ if (isset($_SESSION['permission']))
                         <td><?php echo $result["ed"]; ?></td>
                         <td><?php echo $result["notes"]; ?></td>
                         <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
+                        <td><a href="remove_transaction.php?transaction_id=<?php echo $result["tid"]; ?>&request_id=<?php echo $result["rid"]; ?>">حذف</a></td>
 
                     </tr>
 
