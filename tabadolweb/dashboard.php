@@ -165,7 +165,7 @@ if (isset($_SESSION['permission']))
                         <td><?php echo $result["st"]; ?></td>
                         <td><?php echo $result["ed"]; ?></td>
                         <td><?php echo $result["notes"]; ?></td>
-                        <td><?php echo $result["notes"]; ?></td>
+                        <td><a href="reportform.php?id=<?php echo $result["school_id"]; ?>">'طباعه</a> </td>
                         <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
                         <td><a href="remove_transaction.php?transaction_id=<?php echo $result["tid"]; ?>&request_id=<?php echo $result["rid"]; ?>">حذف</a></td>
 
