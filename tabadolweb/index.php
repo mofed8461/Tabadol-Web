@@ -43,7 +43,7 @@
 
 <body>
 <div align="center" style="padding-top: 10%">
-<div align="center"><img src="imgs/adminpic.png" width="150" height="150"  /></div>
+<div align="center"><img src="imgs/bg.jpeg" width="300" height="300"  /></div>
 <h3><div  align="center" >Admin Login </div></h3>
 <div align="center">
     <form name="adminform" method="post" action="adminlogin.php">
