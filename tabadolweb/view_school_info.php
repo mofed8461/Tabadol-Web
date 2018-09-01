@@ -53,6 +53,8 @@ if (isset($_GET["id"]))
         echo "<th>رقم المدرسه</th>";
         echo "<th>المدينه</th>";
         echo "<th>الخريطه</th>";
+        echo "<th>من الصف</th>";
+        echo "<th>الي الصف</th>";
         echo "</tr>";
 
         while ($result = $query->fetch_assoc())
@@ -65,6 +67,8 @@ if (isset($_GET["id"]))
             echo "<td>" . $result["email"] . "</td>";
             echo "<td>" . $result["school_number"] . "</td>";
             echo "<td>" . $result["city"] . "</td>";
+            echo "<td>" . $result["grade_from"] . "</td>";
+            echo "<td>" . $result["grade_to"] . "</td>";
             echo "<td><a href='https://www.google.com/maps/@" . $result["location_lat"] . "," . $result["location_lng"] . ",15.78z' >الخريطه</a></td>";
             echo "</tr>";
         }
