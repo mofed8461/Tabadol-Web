@@ -6,7 +6,6 @@ include "connect.php";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <script language="javascript">
-
         function fun2() {
             var search = document.form2.search1.value;
 
@@ -17,8 +16,9 @@ include "connect.php";
                 document.form2.submit();
             }
         }
-
-
+        
+        
+        
     </script>
     <meta charset="UTF-8">
     <style>
@@ -51,12 +51,13 @@ include "connect.php";
 
 
 
-        <table>
+         <table>
 
-            <tr><td><input type="text" name="search1" /></td><td> البحث عن المدرسة حسب الاسم :</td></tr>
-            <tr><td><input type="button" value="البحث" onclick="fun2()"/></td></tr>
-        </table>
-    </form>
+             <tr><td><input type="text" name="search1" /></td><td> البحث عن المدرسة حسب الاسم :</td></tr>
+             <tr><td><input type="button" value="البحث" onclick="fun2()"/></td></tr>
+         </table>
+     </form>
+
 
 <?php
 
@@ -67,7 +68,6 @@ if (isset($_SESSION['permission']))
     if ($_SESSION['permission'] == 1)
     {
         // admin
-        /*
         $query = $con->query("select schools.id as id, schools.name as name, schools.city as city, schools.manager_name as manager_name, schools.phone as phone, schools.school_number as school_number from schools");
 
         $count = mysqli_num_rows($query);
@@ -75,10 +75,12 @@ if (isset($_SESSION['permission']))
         echo "<tr>";
         echo "<th>تعديل</th>";
         echo "<th>اسم المدرسه</th>";
-        echo "<th>المدينه</td>";
-        echo "<th>اسم المدير/ه</td>";
-        echo "<th>رقم الهاتف</td>";
-        echo "<th>رقم المدرسه</td>";
+        echo "<th>المدينه</th>";
+        echo "<th>اسم المدير/ه</th>";
+        echo "<th>رقم الهاتف</th>";
+        echo "<th>رقم المدرسه</th>";
+        echo "<th>من الصف</th>";
+        echo "<th>الى الصف</th>";
         echo "</tr>";
 
         while ($result = $query->fetch_assoc())
@@ -90,10 +92,10 @@ if (isset($_SESSION['permission']))
             echo "<td>" . $result["manager_name"] . "</td>";
             echo "<td>" . $result["phone"] . "</td>";
             echo "<td>" . $result["school_number"] . "</td>";
+            echo "<td>" . $result["grade_from"] . "</td>";
+            echo "<td>" . $result["grade_to"] . "</td>";
             echo "</tr>";
-
         }
-        */
         echo "</table>";
 
         echo "<div> <a href='add%20school.php' > اضافة مدرسة جديدة </a> </div>";
@@ -119,7 +121,8 @@ if (isset($_SESSION['permission']))
                 <th>رقم الشخص المعطي</th>
                 <th>تاريخ الاقراض</th>
                 <th>تاريخ الترجيع</th>
-                <th>ملاحظات</th>
+                 <th>ملاحظات</th>
+                <th>طباعه</th>
                 <th>اظهار الطلب</th>
                 <th>حذف الطلب</th>
 
@@ -165,7 +168,8 @@ if (isset($_SESSION['permission']))
                         <td><?php echo $result["st"]; ?></td>
                         <td><?php echo $result["ed"]; ?></td>
                         <td><?php echo $result["notes"]; ?></td>
-                        <td><a href="reportform.php?id=<?php echo $result["tid"]; ?>">'طباعه</a> </td>
+                        <td><a href="reportform.php?id=<?php echo $result["tid"]; ?>">طباعه</a> </td>
+
                         <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
                         <td><a href="remove_transaction.php?transaction_id=<?php echo $result["tid"]; ?>&request_id=<?php echo $result["rid"]; ?>">حذف</a></td>
 
