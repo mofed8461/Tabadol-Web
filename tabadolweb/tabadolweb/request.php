@@ -100,10 +100,10 @@ if (!isset($_GET['id']))
     <div align="center">
         <h3>اضافة طلب استقراض</h3>
         <br />
-        رقم المسؤول
+        رقم المسؤوول
         <input id="phone" type="text" />
         <br />
-        اسم المسؤول
+        اسم المسؤوول
         <input id="name" type="text" />
         <br />
         تاريخ الاستقراض من
@@ -130,22 +130,6 @@ if (!isset($_GET['id']))
 </html>
 
 <script type="text/javascript">
-
-    function diff( date1, date2 ) {
-      //Get 1 day in milliseconds
-      var one_day=1000*60*60*24;
-
-      // Convert both dates to milliseconds
-      var date1_ms = date1.getTime();
-      var date2_ms = date2.getTime();
-
-      // Calculate the difference in milliseconds
-      var difference_ms = date2_ms - date1_ms;
-        
-      // Convert back to days and return
-      return Math.round(difference_ms/one_day); 
-    }
-
     function submit()
     {
         var phone = document.getElementById("phone");
@@ -187,12 +171,12 @@ if (!isset($_GET['id']))
 
         if (phone.value == "")
         {
-            alert("رقم المسؤول فارغ");
+            alert("رقم المسؤوول فارغ");
             return;
         }
         if (name.value == "")
         {
-            alert("اسم المسؤول فارغ");
+            alert("اسم المسؤوول فارغ");
             return;
         }
 
@@ -232,11 +216,6 @@ if (!isset($_GET['id']))
         var st = start_time_y + "-" + start_time_m + "-" + start_time_d;
         var ed = end_time_y + "-" + end_time_m + "-" + end_time_d;
 
-        if (diff(new Date(st), new Date(ed)) > 7)
-        {
-            alert("مدو الاستقراض لا يجب ان تزيد عن 7 ايام");
-            return;
-        }
 
         window.location = "request_view.php?id=<?php echo $_GET["id"]; ?>&phone=" + phone.value + "&name=" + name.value + "&start_time=" + st + "&end_time=" + ed + "&notes=" + notes.value;
     }

@@ -5,21 +5,6 @@ include "connect.php";
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <script language="javascript">
-
-        function fun2() {
-            var search = document.form2.search1.value;
-
-            if (search == ""){
-                alert("خطا : الرجاء ادخال اسم المدرسة");
-
-            }else {
-                document.form2.submit();
-            }
-        }
-
-
-    </script>
     <meta charset="UTF-8">
     <style>
         p.normal {
@@ -47,17 +32,6 @@ include "connect.php";
 <div align="center" style="padding-top: 10%">
 <div align="center">
 
-    <form action="schoolsearch.php" name="form2" method="post">
-
-
-
-        <table>
-
-            <tr><td><input type="text" name="search1" /></td><td> البحث عن المدرسة حسب الاسم :</td></tr>
-            <tr><td><input type="button" value="البحث" onclick="fun2()"/></td></tr>
-        </table>
-    </form>
-
 <?php
 
 
@@ -67,7 +41,6 @@ if (isset($_SESSION['permission']))
     if ($_SESSION['permission'] == 1)
     {
         // admin
-        /*
         $query = $con->query("select schools.id as id, schools.name as name, schools.city as city, schools.manager_name as manager_name, schools.phone as phone, schools.school_number as school_number from schools");
 
         $count = mysqli_num_rows($query);
@@ -91,17 +64,10 @@ if (isset($_SESSION['permission']))
             echo "<td>" . $result["phone"] . "</td>";
             echo "<td>" . $result["school_number"] . "</td>";
             echo "</tr>";
-
         }
-        */
         echo "</table>";
 
-        echo "<div> <a href='add%20school.php' > اضافة مدرسة جديدة </a> </div>";
-        ?>
-        <iframe src="users.php">
-            <p>Your browser does not support iframes.</p>
-        </iframe>
-        <?php
+        echo"<div> <a href='add%20school.php' > اضافة مدرسة جديدة </a> </div>";
         echo"<div> <a href='adduser.php' > اضافة مستخدم جديد </a> </div>";
 
         ?>
@@ -121,8 +87,6 @@ if (isset($_SESSION['permission']))
                 <th>تاريخ الترجيع</th>
                 <th>ملاحظات</th>
                 <th>اظهار الطلب</th>
-                <th>حذف الطلب</th>
-
             </tr>
             <?php
 
@@ -131,7 +95,6 @@ if (isset($_SESSION['permission']))
                     sc1.id AS school_id,
                     sc1.name AS ask, 
                     sc2.name AS give, 
-                    transactions.id AS tid,
                     transactions.phone_1 AS p1,
                     transactions.phone_2 AS p2,
                     transactions.name_1 AS n1,
@@ -165,9 +128,7 @@ if (isset($_SESSION['permission']))
                         <td><?php echo $result["st"]; ?></td>
                         <td><?php echo $result["ed"]; ?></td>
                         <td><?php echo $result["notes"]; ?></td>
-                        <td><?php echo $result["notes"]; ?></td>
                         <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
-                        <td><a href="remove_transaction.php?transaction_id=<?php echo $result["tid"]; ?>&request_id=<?php echo $result["rid"]; ?>">حذف</a></td>
 
                     </tr>
 
@@ -176,12 +137,8 @@ if (isset($_SESSION['permission']))
 
             ?>
         </table>
-        <h4>الاخبار</h4>
-        <br />
-        <iframe src="news.php">
-              <p>Your browser does not support iframes.</p>
-        </iframe>
-        <br />
+
+
         <?php
 
 
@@ -253,7 +210,7 @@ if (isset($_SESSION['permission']))
 
             ?>
         </table>
-        
+
         <?php
 
         echo "<br /><a href='request.php?id=" . $school_id . "'>اضافه طلب استقراض</a><br />";
@@ -328,13 +285,7 @@ if (isset($_SESSION['permission']))
             ?>
         </table>
 
-        <h4>الاخبار<h4>
-        <br />
 
-        <iframe src="news.php">
-              <p>Your browser does not support iframes.</p>
-        </iframe>
-        <br />
 
         <?php
 

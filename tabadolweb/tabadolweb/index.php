@@ -43,26 +43,16 @@
 
 <body>
 <div align="center" style="padding-top: 10%">
-<div align="center"><img src="imgs/bg.jpeg" width="300" height="300"  /></div>
+<div align="center"><img src="imgs/adminpic.png" width="150" height="150"  /></div>
 <h3><div  align="center" >Admin Login </div></h3>
 <div align="center">
     <form name="adminform" method="post" action="adminlogin.php">
         <table >
             <tr><td>Username</td><td><input type="text" name="username" /></td></tr>
-            <tr><td>Password</td><td><input id="myInput" type="password" name="password" /></td></tr>
+            <tr><td>Password</td><td><input type="password" name="password" /></td></tr>
             <tr>
-                <td colspan="2" align="center"><input id="myBtn" type="button" value="Login" onclick="check()"  /></td>
+                <td colspan="2" align="center"><input type="button" value="Login" onclick="check()"  /></td>
             </tr>
-
-            <script>
-                var input = document.getElementById("myInput");
-                input.addEventListener("keyup", function(event) {
-                    event.preventDefault();
-                    if (event.keyCode === 13) {
-                        document.getElementById("myBtn").click();
-                    }
-                });
-            </script>
 
         </table>
     </form>
