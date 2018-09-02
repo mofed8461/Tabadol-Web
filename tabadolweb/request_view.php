@@ -32,7 +32,11 @@ if (!isset($_GET["request_id"]))
     $school_id = $_GET["id"];
     $request_id = $result["id"];
 
-    header('Location: request_view.php?id=' . $school_id . "&request_id=" . $request_id);
+    ?>
+    <script type="text/javascript">
+        window.location = 'request_view.php?id=<?php echo $school_id . "&request_id=" . $request_id; ?>';
+    </script>
+    <?php
 }
 
 $school_id = $_GET["id"];

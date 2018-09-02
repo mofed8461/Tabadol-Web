@@ -8,12 +8,22 @@ $school_number = $_POST["school_number"];
 
 include("connect.php");
 
-$con->query("INSERT into users  set  username='$username',password='$password',permission=2 , school_id = '$school_number'") or die("Error in inserting data");
+$query = $con->query("SELECT * FROM schools WHERE school_number='$school_number'");
+$result = $query->fetch_assoc();
+
+if ($result)
+{
+	$con->query("INSERT into users  set  username='$username',password='$password',permission=2 , school_id=" . $result["id"]) or die("Error in inserting data");
+	echo "<h2 align='center'>تمت اضافه مستخدم</h2>";
+
+}
+else
+{
+	echo "<h2 align='center'>خطأ في الرقم الوطني للمدرسه</h2>";
+
+}
 
 
-
-
-echo "<h2 align='center'>Thank you , user is added</h2>";
 
 ?>
 <script language="javascript">

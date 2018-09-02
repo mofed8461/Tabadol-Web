@@ -48,7 +48,7 @@ if (isset($_GET['id']) && isset($_GET['id2']) && isset($_GET['request_id']))
 <body>
 <div align="center" style="padding-top: 10%">
 	<div align="center">
-		مدرسه <a href="view_school_info.php?id="<?php echo $_GET["id"]; ?>"><?php echo $result["name"]; ?></a> تطلب من حضرتكم استقراض من تاريخ <?php echo $result2["start_time"]; ?> الى تاريخ <?php echo $result2["end_time"]; ?> و ذلك بالمطاليب التالية
+		مدرسه <a href="view_school_info.php?id=<?php echo $_GET["id"]; ?>"><?php echo $result["name"]; ?></a> تطلب من حضرتكم استقراض من تاريخ <?php echo $result2["start_time"]; ?> الى تاريخ <?php echo $result2["end_time"]; ?> و ذلك بالمطاليب التالية
 		<br />
 		<table border="1px">
 			<tr>
@@ -99,7 +99,7 @@ if (isset($_GET['id']) && isset($_GET['id2']) && isset($_GET['request_id']))
 
 	function submit()
 	{
-		window.location = "<?php echo "confirm_request.php?id=" . $_GET["id"] . "&id2=" . $result["id"] . "&request_id=" . $_GET["request_id"]; ?>&name=" + document.getElementById("name").value + "&phone=" + document.getElementById("phone").value + "&notes=" + document.getElementById("notes").value;
+		window.location = "<?php echo "confirm_request.php?id=" . $_GET["id"] . "&id2=" . $_GET["id2"] . "&request_id=" . $_GET["request_id"]; ?>&name=" + document.getElementById("name").value + "&phone=" + document.getElementById("phone").value + "&notes=" + document.getElementById("notes").value;
 	}
 </script>
 	<?php

@@ -12,7 +12,7 @@ if (isset($_GET["phone2"]))
 {
 	// confirm2.php?id=2&id2=1&request_id=1&name=ahmad&phone=333&name2=ali&phone2=0&notes=no%20txt
 
-	$email_query = $con->query("SELECT email FROM schools WHERE id=" . $_GET["id"] . " OR id=" . $_GET["id2"]);
+	$email_query = $con->query("SELECT id, email FROM schools WHERE id=" . $_GET["id"] . " OR id=" . $_GET["id2"]);
 
 	
 
@@ -24,7 +24,8 @@ if (isset($_GET["phone2"]))
 		phone_2, 
 		name_1, 
 		name_2, 
-		request_id) 
+		request_id,
+		admin_status) 
 		VALUES (
 		'" . $_GET["id"] . "',
 		'" . $_GET["id2"] . "',
@@ -32,7 +33,7 @@ if (isset($_GET["phone2"]))
 		'" . $_GET["phone2"] . "',
 		'" . $_GET["name"] . "',
 		'" . $_GET["name2"] . "',
-		'" . $_GET["request_id"] . "')");
+		'" . $_GET["request_id"] . "', '')");
 
 	$con->query("UPDATE requests SET req_code='completed' WHERE id=" . $_GET["request_id"]);
 

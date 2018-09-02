@@ -10,10 +10,12 @@ if (isset($_GET['transaction_id']) && isset($_GET['request_id']))
 
     $con->query("DELETE FROM requests WHERE transactions.id=" . $_GET['request_id']);
 
-    header('Location: dashboard.php');
 }
 else
 {
-    header('Location: dashboard.php');
 }
 ?>
+
+<script type="text/javascript">
+	window.location='dashboard.php';
+</script>

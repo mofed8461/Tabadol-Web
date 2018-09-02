@@ -176,13 +176,13 @@ if (isset($_SESSION['permission']))
 
                         <td>
                             <?php 
-                            if ($result["admin_status"] == "")
+                            if (false && $result["admin_status"] == "")
                             {
                                 ?>
                                 <a href="approve_transaction.php?transaction_id=<?php echo $result["tid"]; ?>">موافقة على العمليه</a>
                                 <?php 
                             }
-                            else
+                            else if (false)
                             {
                                 echo "تمت الموافقة";
                             }
@@ -348,11 +348,11 @@ if (isset($_SESSION['permission']))
                             <?php  
                             if ($result["admin_status"] == "")
                             {
-                                echo "لم يتم الموافقه من الاداره بعد";
+                                //echo "لم يتم الموافقه من الاداره بعد";
                             }
                             else
                             {
-                                echo "تمت الموافقة و يمكنكم الاقتراض";
+                                //echo "تمت الموافقة و يمكنكم الاقتراض";
                             }
 
 

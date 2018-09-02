@@ -97,13 +97,20 @@ if (isset($_GET['id']) && isset($_GET['request_id']))
 	  var d = R * c;
 	  return d; // returns the distance in meter
 	};*/
-
-
-
+?>
+<script type="text/javascript">
+    setTimeout("window.location='dashboard.php'",'3000');
+	</script>
+<?php
 
 }
 else
 {
+	?>
+	<script type="text/javascript">
+    setTimeout("window.location='dashboard.php'",'3000');
+	</script>
+	<?php
     header('Location: dashboard.php');
 }
 ?>
