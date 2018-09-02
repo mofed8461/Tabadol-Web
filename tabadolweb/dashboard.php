@@ -125,7 +125,7 @@ if (isset($_SESSION['permission']))
                 <th>طباعه</th>
                 <th>اظهار الطلب</th>
                 <th>حذف الطلب</th>
-
+                <th>الحاله</th>
             </tr>
             <?php
 
@@ -140,6 +140,7 @@ if (isset($_SESSION['permission']))
                     transactions.name_1 AS n1,
                     transactions.name_2 AS n2,
                     transactions.request_id AS rid,
+                    transactions.admin_status AS admin_status,
                     requests.start_time AS st,
                     requests.end_time AS ed,
                     requests.notes AS notes
@@ -172,6 +173,21 @@ if (isset($_SESSION['permission']))
 
                         <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
                         <td><a href="remove_transaction.php?transaction_id=<?php echo $result["tid"]; ?>&request_id=<?php echo $result["rid"]; ?>">حذف</a></td>
+
+                        <td>
+                            <?php 
+                            if ($result["admin_status"] == "")
+                            {
+                                ?>
+                                <a href="approve_transaction.php?transaction_id=<?php echo $result["tid"]; ?>">موافقة على العمليه</a>
+                                <?php 
+                            }
+                            else
+                            {
+                                echo "تمت الموافقة";
+                            }
+                            ?>
+                        </td>
 
                     </tr>
 
@@ -235,6 +251,7 @@ if (isset($_SESSION['permission']))
                 <th>الى</th>
                 <th>ملاحظات</th>
                 <th>اظهار</th>
+
             </tr>
             <?php
 
@@ -249,7 +266,6 @@ if (isset($_SESSION['permission']))
                         <td><?php echo $result["end_time"]; ?></td>
                         <td><?php echo $result["notes"]; ?></td>
                         <td><a href="request_view.php?id=<?php echo $school_id; ?>&request_id=<?php echo $result["id"]; ?>">اظهار</a></td>
-
                     </tr>
 
                     <?php
@@ -279,6 +295,8 @@ if (isset($_SESSION['permission']))
                 <th>تاريخ الترجيع</th>
                 <th>ملاحظات</th>
                 <th>اظهار الطلب</th>
+                <th>طباعه</th>
+                <th>الحاله</th>
             </tr>
             <?php
 
@@ -293,6 +311,8 @@ if (isset($_SESSION['permission']))
                     transactions.name_1 AS n1,
                     transactions.name_2 AS n2,
                     transactions.request_id AS rid,
+                    transactions.admin_status AS admin_status,
+                    transactions.id AS tid,
                     requests.start_time AS st,
                     requests.end_time AS ed,
                     requests.notes AS notes
@@ -323,6 +343,23 @@ if (isset($_SESSION['permission']))
                         <td><?php echo $result["ed"]; ?></td>
                         <td><?php echo $result["notes"]; ?></td>
                         <td><a href="request_view.php?id=<?php echo $school_id; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
+                        <td><a href="reportform.php?id=<?php echo $result["tid"]; ?>">طباعه</a> </td>
+                        <td>
+                            <?php  
+                            if ($result["admin_status"] == "")
+                            {
+                                echo "لم يتم الموافقه من الاداره بعد";
+                            }
+                            else
+                            {
+                                echo "تمت الموافقة و يمكنكم الاقتراض";
+                            }
+
+
+                            ?>
+                                
+
+                        </td>
 
                     </tr>
 
