@@ -195,6 +195,70 @@ if (isset($_SESSION['permission']))
                 }
 
             ?>
+
+
+
+            <?php
+
+                $query = $con->query("
+                    SELECT 
+                    sc1.id AS school_id,
+                    sc1.name AS ask, 
+                    requests.name AS p1,
+                    requests.phone AS n1,
+                    requests.start_time AS st,
+                    requests.end_time AS ed,
+                    requests.notes AS notes,
+                    requests.id AS rid
+                    FROM
+                    schools AS sc1, 
+                    requests
+                    WHERE 
+                    requests.school_id=sc1.id AND
+                    requests.req_code='published'
+                    ");
+
+
+                while ($result = $query->fetch_assoc())
+                {
+                    ?>
+                    <tr>
+                        <td><?php echo $result["ask"]; ?></td>
+                        <td>لم يتم الاتفاق بعد</td>
+                        <td><?php echo $result["p1"]; ?></td>
+                        <td><?php echo $result["n1"]; ?></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><?php echo $result["st"]; ?></td>
+                        <td><?php echo $result["ed"]; ?></td>
+                        <td><?php echo $result["notes"]; ?></td>
+                        <td>-</td>
+
+                        <td><a href="request_view.php?id=<?php echo $result["school_id"]; ?>&request_id=<?php echo $result["rid"]; ?>">اظهار</a></td>
+                        <td></td>
+
+                        <td>
+                            <?php 
+                            if (false && $result["admin_status"] == "")
+                            {
+                                ?>
+                                <a href="approve_transaction.php?transaction_id=<?php echo $result["tid"]; ?>">موافقة على العمليه</a>
+                                <?php 
+                            }
+                            else if (false)
+                            {
+                                echo "تمت الموافقة";
+                            }
+                            ?>
+                        </td>
+
+                    </tr>
+
+                    <?php
+                }
+
+            ?>
+
         </table>
         <h4>الاخبار</h4>
         <br />
@@ -390,6 +454,8 @@ else
 
 ?>
 <a href="logout.php">تسجيل الخروج</a>
+<br />
+<br />
 </div>
 </div>
 </body>
